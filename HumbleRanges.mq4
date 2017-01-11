@@ -13,12 +13,12 @@
 
 #property indicator_buffers 8
 
-#property indicator_color1 Linen
-#property indicator_color2 LightCyan
-#property indicator_color3 PeachPuff
-#property indicator_color4 LightBlue
-#property indicator_color5 Linen
-#property indicator_color6 LightCyan
+#property indicator_color1 PeachPuff
+#property indicator_color2 PowderBlue
+#property indicator_color3 LightPink
+#property indicator_color4 DeepSkyBlue
+#property indicator_color5 PeachPuff
+#property indicator_color6 PowderBlue
 #property indicator_color7 DodgerBlue
 #property indicator_color8 DodgerBlue
 
