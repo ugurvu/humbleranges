@@ -1,11 +1,11 @@
 //+------------------------------------------------------------------+
-//|                                                 HumbleRanges.mq4 |
+//|                                                     HumbleMA.mq4 |
 //|                                        Copyright 2016, Humble AI |
 //|                                          http://www.humbleai.com |
 //+------------------------------------------------------------------+
 #property copyright   "2016, Humble AI"
 #property link        "http://www.humbleai.com"
-#property description "Humble Ranges"
+#property description "Humble MA"
 
 #property strict
 
@@ -34,8 +34,10 @@
 //--- indicator parameters
 
 input int            InpPricePeriod = 1440;        // Price Period
-input int            PriceMode = 3;               // 0: Close, 1: High, 2: Low, 3: Typical, 4: Median
-input double         PipRange = 0.0025;           // 25 Pips for EURUSD
+input int            PriceMode = 3;                // 0: Close, 1: High, 2: Low, 3: Typical, 4: Median
+input int            CalcMode = 1;                 // 1: Pips, 2: Percentage
+input double         PipRange = 0.0025;            // 25 Pips / Pips Mode
+input double         Percentage = 25;              // 25 percent of H-L / Percentage Mode
 
 //--- indicator buffers
 double PriceExtLineBuffer[];
@@ -98,6 +100,7 @@ void start()
    Counted_bars = IndicatorCounted(); // Number of counted bars
    i=Bars-Counted_bars-1;           // Index of the first uncounted
    int HighIndex, LowIndex;         // Prev HL positions
+   double FactorValue;
    
    switch(PriceMode) 
      {   
@@ -133,27 +136,28 @@ void start()
       
       PriceHExtLineBuffer[i] = highestp;
       PriceLExtLineBuffer[i] = lowestp;
+      if (CalcMode == 1) FactorValue = PipRange; else FactorValue = (highestp  - lowestp) / 100 * Percentage;
       
       if (HighIndex > LowIndex) 
       {
          // highesttan aşağı
-         LevelLine1[i] = highestp - PipRange;
-         LevelLine2[i] = highestp - PipRange * 2;
-         LevelLine3[i] = highestp - PipRange * 3;
-         LevelLine4[i] = highestp - PipRange * 4;
-         LevelLine5[i] = highestp - PipRange * 5;
-         LevelLine6[i] = highestp - PipRange * 6;
+         LevelLine1[i] = highestp - FactorValue;
+         LevelLine2[i] = highestp - FactorValue * 2;
+         LevelLine3[i] = highestp - FactorValue * 3;
+         LevelLine4[i] = highestp - FactorValue * 4;
+         LevelLine5[i] = highestp - FactorValue * 5;
+         LevelLine6[i] = highestp - FactorValue * 6;
          
          
       } else 
       { 
          // lowesttan yukarı
-         LevelLine1[i] = lowestp + PipRange;
-         LevelLine2[i] = lowestp + PipRange * 2;
-         LevelLine3[i] = lowestp + PipRange * 3;
-         LevelLine4[i] = lowestp + PipRange * 4;
-         LevelLine5[i] = lowestp + PipRange * 5;
-         LevelLine6[i] = lowestp + PipRange * 6;
+         LevelLine1[i] = lowestp + FactorValue;
+         LevelLine2[i] = lowestp + FactorValue * 2;
+         LevelLine3[i] = lowestp + FactorValue * 3;
+         LevelLine4[i] = lowestp + FactorValue * 4;
+         LevelLine5[i] = lowestp + FactorValue * 5;
+         LevelLine6[i] = lowestp + FactorValue * 6;
       }
 
       
