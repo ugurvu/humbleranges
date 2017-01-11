@@ -1,4 +1,4 @@
-# Humble MA
+# Humble Ranges
 
 I suggest that you use with small timeframes & large periods, such as 1440 on M1.
 
