@@ -37,7 +37,7 @@ input int            InpPricePeriod = 1440;        // Price Period
 input int            PriceMode = 3;                // 0: Close, 1: High, 2: Low, 3: Typical, 4: Median
 input int            CalcMode = 1;                 // 1: Pips, 2: Percentage
 input double         PipRange = 0.0025;            // 25 Pips / Pips Mode
-input double         Percentage = 25;              // 25 percent of H-L / Percentage Mode
+input double         Percentage = 33.33;              // 33.33 percent of H-L / Percentage Mode
 
 //--- indicator buffers
 double PriceExtLineBuffer[];
